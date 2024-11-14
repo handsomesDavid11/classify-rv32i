@@ -20,6 +20,9 @@ abs:
     # Load number from memory
     lw t0 0(a0)
     bge t0, zero, done
+    xori t0, t0, 0xffffffff
+    addi t0, t0, 1
+    sw t0 0(a0)
 
     # TODO: Add your own implementation
 
