@@ -24,6 +24,7 @@
 argmax:
     li t6, 1
     blt a1, t6, handle_error
+    
 
     lw t0, 0(a0)   #  array[0]
     li t1, 0        #MAX VALUE
@@ -41,16 +42,16 @@ loop_start:
     j next
 
 change:
-    mv t4, t0
-    addi t3, t2, 0x0 
+    mv t0, t4
+    mv t3, t2
 
 next:
     addi t2 ,t2, 1 
     j loop_start
 
 end1:
-    mv a0, t1
-    j exit
+    mv a0, t3
+    jr ra
 
 handle_error:
     li a0, 36

@@ -41,7 +41,7 @@ matmul:
     blt a4, t0, error
     blt a5, t0, error
     bne a2, a4, error
-
+    
     # Prologue
     addi sp, sp, -28
     sw ra, 0(sp)
@@ -86,6 +86,7 @@ inner_loop_start:
     sw a3, 12(sp)
     sw a4, 16(sp)
     sw a5, 20(sp)
+
     
     mv a0, s3 # setting pointer for matrix A into the correct argument value
     mv a1, s4 # setting pointer for Matrix B into the correct argument value
@@ -103,6 +104,7 @@ inner_loop_start:
     lw a3, 12(sp)
     lw a4, 16(sp)
     lw a5, 20(sp)
+    
     addi sp, sp, 24
     
     sw t0, 0(s2)
@@ -116,6 +118,29 @@ inner_loop_start:
     
 inner_loop_end:
     # TODO: Add your own implementation
+    # add to next row
+    addi s0, s0, 1
+    add s3, a2, s3
+    add s3, a2, s3
+    add s3, a2, s3
+    add s3, a2, s3
+    addi s4, s4, 4
+
+    j outer_loop_start
+
+outer_loop_end:
+
+    
+    lw ra, 0(sp)
+    
+    lw s0, 4(sp)
+    lw s1, 8(sp)
+    lw s2, 12(sp)
+    lw s3, 16(sp)
+    lw s4, 20(sp)
+    lw s5, 24(sp)
+    addi sp, sp, 28
+    jr ra
 
 error:
     li a0, 38

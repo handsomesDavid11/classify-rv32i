@@ -23,10 +23,10 @@
 #   Result: [ 0, 0, 3,  0, 5]
 # ==============================================================================
 relu:
-    li t0, 1            #index counter      
+    li t0, 0            #index counter      
     blt a1, t0, error     
     li t1, 0            #zero register
-    addi t3, a0, 0x0
+    mv t3, a0
 loop_start:
     # TODO: Add your own implementation
     bge t0, a1, end1
@@ -35,9 +35,7 @@ loop_start:
     j next1
 
 set_zero:
-    sw t2 , 0(a0)
-
-
+    sw t1 , 0(t3)
 
 next1:
     addi t3, t3, 4
@@ -45,7 +43,7 @@ next1:
     j loop_start
 
 end1:
-    j exit
+    jr ra
 
 error:
     li a0, 36          
